@@ -8,6 +8,7 @@ require (
 	github.com/daheige/thinkgo v1.10.6
 	github.com/fsnotify/fsnotify v1.4.9
 	github.com/gin-gonic/gin v1.6.3
+	github.com/go-playground/validator/v10 v10.2.0
 	github.com/golang/protobuf v1.4.2
 	github.com/gomodule/redigo v1.8.2
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
