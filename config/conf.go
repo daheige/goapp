@@ -1,6 +1,7 @@
 package config
 
 import (
+	"log"
 	"time"
 
 	"github.com/daheige/goapp/pkg/setting"
@@ -13,12 +14,14 @@ var (
 
 // AppServerSettingS server config.
 type AppServerSettingS struct {
-	AppEnv       string
-	AppDebug     bool
-	GRPCPort     int
-	HttpPort     int
-	ReadTimeout  time.Duration
-	WriteTimeout time.Duration
+	AppEnv              string
+	AppDebug            bool
+	GRPCPort            int
+	GRPCHttpGatewayPort int
+	HttpPort            int
+	ReadTimeout         time.Duration
+	WriteTimeout        time.Duration
+	LogDir              string
 }
 
 // InitConfig 读取rpc配置文件
@@ -35,6 +38,10 @@ func InitConfig(configDir string) error {
 
 	AppServerConf.ReadTimeout *= time.Second
 	AppServerConf.WriteTimeout *= time.Second
+
+	if AppServerConf.AppDebug {
+		log.Println("app server config: ", AppServerConf)
+	}
 
 	// init db
 	err = InitDatabase(s, "DbDefault", "default")

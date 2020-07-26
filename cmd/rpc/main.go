@@ -18,28 +18,30 @@ import (
 
 var (
 	configDir string
-	logDir    string
 )
 
 func init() {
 	flag.StringVar(&configDir, "config_dir", "./", "config dir")
-	flag.StringVar(&logDir, "log_dir", "./logs", "log dir")
 	flag.Parse()
-
-	// 日志文件设置
-	logger.SetLogDir(logDir)
-	logger.SetLogFile("go-grpc.log")
-	logger.MaxSize(500)
-	logger.TraceFileLine(true) //开启文件名和行数追踪
-
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
-	logger.InitLogger(3)
 
 	// init config.
 	err := config.InitConfig(configDir)
 	if err != nil {
 		log.Fatalf("init config err: %v", err)
 	}
+
+	// 日志文件设置
+	if config.AppServerConf.LogDir == "" {
+		config.AppServerConf.LogDir = "./logs"
+	}
+
+	logger.SetLogDir(config.AppServerConf.LogDir)
+	logger.SetLogFile("go-grpc.log")
+	logger.MaxSize(500)
+	logger.TraceFileLine(true) //开启文件名和行数追踪
+
+	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
+	logger.InitLogger(3)
 }
 
 func main() {

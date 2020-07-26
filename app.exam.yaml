@@ -1,8 +1,12 @@
-GRPCServer:
+AppServer:
+  AppEnv: dev
+  AppDebug: true
   GRPCPort: 50051
-  HttpPort: 1336
+  GRPCHttpGatewayPort: 1336
+  HttpPort: 1338
   ReadTimeout: 6
   WriteTimeout: 6
+  LogDir: ./logs
 
 #db 配置
 DbDefault:
@@ -29,4 +33,3 @@ RedisCommon:
   IdleTimeout: 30 #最大的空闲连接等待时间，超过此时间后，空闲连接将被关闭
 
 McAddress: 192.168.0.11:11211
-

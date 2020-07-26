@@ -26,33 +26,32 @@ import (
 	_ "go.uber.org/automaxprocs"
 )
 
-var port int
-var logDir string
 var configDir string
 var wait time.Duration // 平滑重启的等待时间1s or 1m
 
 func init() {
-	flag.IntVar(&port, "port", 1338, "app listen port")
-	flag.StringVar(&logDir, "log_dir", "./logs", "log dir")
 	flag.StringVar(&configDir, "config_dir", "./", "config dir")
 	flag.DurationVar(&wait, "graceful_timeout", 3*time.Second, "the server gracefully reload. eg: 15s or 1m")
 	flag.Parse()
 
-	// 日志文件设置
-	logger.SetLogDir(logDir)
-	logger.SetLogFile("go-web.log")
-	logger.MaxSize(500)
-	logger.TraceFileLine(true) // 开启文件名和行数追踪
-
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
-	logger.InitLogger(3)
-
 	// 初始化配置文件
-	// init config.
 	err := config.InitConfig(configDir)
 	if err != nil {
 		log.Fatalf("init config err: %v", err)
 	}
+
+	// 日志文件设置
+	if config.AppServerConf.LogDir == "" {
+		config.AppServerConf.LogDir = "./logs"
+	}
+
+	logger.SetLogDir(config.AppServerConf.LogDir)
+	logger.SetLogFile("go-web.log")
+	logger.MaxSize(500)
+	logger.TraceFileLine(true) //开启文件名和行数追踪
+
+	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
+	logger.InitLogger(3)
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)
@@ -66,7 +65,7 @@ func init() {
 
 	// 添加prometheus metrics处理器
 	httpMux.Handle("/metrics", promhttp.Handler())
-	gpprof.Run(httpMux, port+1000)
+	gpprof.Run(httpMux, config.AppServerConf.HttpPort+1000)
 
 	// gin mode设置
 	switch config.AppServerConf.AppEnv {
@@ -92,7 +91,7 @@ func main() {
 	// 服务server设置
 	server := &http.Server{
 		Handler:           router,
-		Addr:              fmt.Sprintf("0.0.0.0:%d", port),
+		Addr:              fmt.Sprintf("0.0.0.0:%d", config.AppServerConf.HttpPort),
 		IdleTimeout:       20 * time.Second, // tcp idle time
 		ReadHeaderTimeout: 10 * time.Second,
 		ReadTimeout:       10 * time.Second,
@@ -100,7 +99,7 @@ func main() {
 	}
 
 	// 在独立携程中运行
-	log.Println("server run on: ", port)
+	log.Println("server run on: ", config.AppServerConf.HttpPort)
 	go func() {
 		defer logger.Recover()
 
