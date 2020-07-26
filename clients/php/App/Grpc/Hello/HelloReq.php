@@ -11,6 +11,7 @@ use Google\Protobuf\Internal\GPBUtil;
 /**
  * message 对应生成代码的 struct
  * 定义客户端请求的数据格式
+ * &#64;validator=HelloReq
  *
  * Generated from protobuf message <code>App.Grpc.Hello.HelloReq</code>
  */
@@ -18,6 +19,7 @@ class HelloReq extends \Google\Protobuf\Internal\Message
 {
     /**
      * [修饰符] 类型 字段名 = 标识符;
+     * &#64;inject_tag: json:"id" validate:"required,min=1"
      *
      * Generated from protobuf field <code>int64 id = 1;</code>
      */
@@ -31,6 +33,7 @@ class HelloReq extends \Google\Protobuf\Internal\Message
      *
      *     @type int|string $id
      *           [修饰符] 类型 字段名 = 标识符;
+     *           &#64;inject_tag: json:"id" validate:"required,min=1"
      * }
      */
     public function __construct($data = NULL) {
@@ -40,6 +43,7 @@ class HelloReq extends \Google\Protobuf\Internal\Message
 
     /**
      * [修饰符] 类型 字段名 = 标识符;
+     * &#64;inject_tag: json:"id" validate:"required,min=1"
      *
      * Generated from protobuf field <code>int64 id = 1;</code>
      * @return int|string
@@ -51,6 +55,7 @@ class HelloReq extends \Google\Protobuf\Internal\Message
 
     /**
      * [修饰符] 类型 字段名 = 标识符;
+     * &#64;inject_tag: json:"id" validate:"required,min=1"
      *
      * Generated from protobuf field <code>int64 id = 1;</code>
      * @param int|string $var

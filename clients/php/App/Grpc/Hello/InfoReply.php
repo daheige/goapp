@@ -9,21 +9,15 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * 定义服务端响应的数据格式
- *
- * Generated from protobuf message <code>App.Grpc.Hello.HelloReply</code>
+ * Generated from protobuf message <code>App.Grpc.Hello.InfoReply</code>
  */
-class HelloReply extends \Google\Protobuf\Internal\Message
+class InfoReply extends \Google\Protobuf\Internal\Message
 {
     /**
-     * &#64;inject_tag: json:"name"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string address = 1;</code>
      */
-    protected $name = '';
+    protected $address = '';
     /**
-     * &#64;inject_tag: json:"message"
-     *
      * Generated from protobuf field <code>string message = 2;</code>
      */
     protected $message = '';
@@ -34,10 +28,8 @@ class HelloReply extends \Google\Protobuf\Internal\Message
      * @param array $data {
      *     Optional. Data for populating the Message object.
      *
-     *     @type string $name
-     *           &#64;inject_tag: json:"name"
+     *     @type string $address
      *     @type string $message
-     *           &#64;inject_tag: json:"message"
      * }
      */
     public function __construct($data = NULL) {
@@ -46,34 +38,28 @@ class HelloReply extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * &#64;inject_tag: json:"name"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string address = 1;</code>
      * @return string
      */
-    public function getName()
+    public function getAddress()
     {
-        return $this->name;
+        return $this->address;
     }
 
     /**
-     * &#64;inject_tag: json:"name"
-     *
-     * Generated from protobuf field <code>string name = 1;</code>
+     * Generated from protobuf field <code>string address = 1;</code>
      * @param string $var
      * @return $this
      */
-    public function setName($var)
+    public function setAddress($var)
     {
         GPBUtil::checkString($var, True);
-        $this->name = $var;
+        $this->address = $var;
 
         return $this;
     }
 
     /**
-     * &#64;inject_tag: json:"message"
-     *
      * Generated from protobuf field <code>string message = 2;</code>
      * @return string
      */
@@ -83,8 +69,6 @@ class HelloReply extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * &#64;inject_tag: json:"message"
-     *
      * Generated from protobuf field <code>string message = 2;</code>
      * @param string $var
      * @return $this

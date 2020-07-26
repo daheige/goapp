@@ -30,4 +30,17 @@ class GreeterServiceClient extends \Grpc\BaseStub {
         $metadata, $options);
     }
 
+    /**
+     * @param \App\Grpc\Hello\InfoReq $argument input argument
+     * @param array $metadata metadata
+     * @param array $options call options
+     */
+    public function Info(\App\Grpc\Hello\InfoReq $argument,
+      $metadata = [], $options = []) {
+        return $this->_simpleRequest('/App.Grpc.Hello.GreeterService/Info',
+        $argument,
+        ['\App\Grpc\Hello\InfoReply', 'decode'],
+        $metadata, $options);
+    }
+
 }

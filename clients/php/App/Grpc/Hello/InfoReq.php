@@ -9,24 +9,19 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
- * 定义服务端响应的数据格式
+ * &#64;validator=InfoReq
  *
- * Generated from protobuf message <code>App.Grpc.Hello.HelloReply</code>
+ * Generated from protobuf message <code>App.Grpc.Hello.InfoReq</code>
  */
-class HelloReply extends \Google\Protobuf\Internal\Message
+class InfoReq extends \Google\Protobuf\Internal\Message
 {
     /**
-     * &#64;inject_tag: json:"name"
+     * 主要用于grpc validator参数校验
+     * &#64;inject_tag: json:"name" validate:"required,min=1"
      *
      * Generated from protobuf field <code>string name = 1;</code>
      */
     protected $name = '';
-    /**
-     * &#64;inject_tag: json:"message"
-     *
-     * Generated from protobuf field <code>string message = 2;</code>
-     */
-    protected $message = '';
 
     /**
      * Constructor.
@@ -35,9 +30,8 @@ class HelloReply extends \Google\Protobuf\Internal\Message
      *     Optional. Data for populating the Message object.
      *
      *     @type string $name
-     *           &#64;inject_tag: json:"name"
-     *     @type string $message
-     *           &#64;inject_tag: json:"message"
+     *           主要用于grpc validator参数校验
+     *           &#64;inject_tag: json:"name" validate:"required,min=1"
      * }
      */
     public function __construct($data = NULL) {
@@ -46,7 +40,8 @@ class HelloReply extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * &#64;inject_tag: json:"name"
+     * 主要用于grpc validator参数校验
+     * &#64;inject_tag: json:"name" validate:"required,min=1"
      *
      * Generated from protobuf field <code>string name = 1;</code>
      * @return string
@@ -57,7 +52,8 @@ class HelloReply extends \Google\Protobuf\Internal\Message
     }
 
     /**
-     * &#64;inject_tag: json:"name"
+     * 主要用于grpc validator参数校验
+     * &#64;inject_tag: json:"name" validate:"required,min=1"
      *
      * Generated from protobuf field <code>string name = 1;</code>
      * @param string $var
@@ -67,32 +63,6 @@ class HelloReply extends \Google\Protobuf\Internal\Message
     {
         GPBUtil::checkString($var, True);
         $this->name = $var;
-
-        return $this;
-    }
-
-    /**
-     * &#64;inject_tag: json:"message"
-     *
-     * Generated from protobuf field <code>string message = 2;</code>
-     * @return string
-     */
-    public function getMessage()
-    {
-        return $this->message;
-    }
-
-    /**
-     * &#64;inject_tag: json:"message"
-     *
-     * Generated from protobuf field <code>string message = 2;</code>
-     * @param string $var
-     * @return $this
-     */
-    public function setMessage($var)
-    {
-        GPBUtil::checkString($var, True);
-        $this->message = $var;
 
         return $this;
     }
