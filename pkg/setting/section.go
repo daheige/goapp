@@ -1,5 +1,6 @@
 package setting
 
+// 存放app.yaml配置
 var sections = make(map[string]interface{})
 
 // ReadSection read section config.

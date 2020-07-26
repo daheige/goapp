@@ -13,6 +13,7 @@ require (
 	github.com/grpc-ecosystem/grpc-gateway v1.14.6
 	github.com/jinzhu/gorm v1.9.15
 	github.com/prometheus/client_golang v1.7.1
+	github.com/robfig/cron/v3 v3.0.1
 	github.com/spf13/viper v1.7.0
 	go.uber.org/automaxprocs v1.3.0
 	google.golang.org/genproto v0.0.0-20200726014623-da3ae01ef02d

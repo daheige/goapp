@@ -26,8 +26,10 @@ import (
 	_ "go.uber.org/automaxprocs"
 )
 
-var configDir string
-var wait time.Duration // 平滑重启的等待时间1s or 1m
+var (
+	configDir string
+	wait      time.Duration // 平滑重启的等待时间1s or 1m
+)
 
 func init() {
 	flag.StringVar(&configDir, "config_dir", "./", "config dir")

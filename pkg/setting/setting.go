@@ -10,11 +10,12 @@ import (
 
 // Setting setting struct
 type Setting struct {
-	vp *viper.Viper
+	vp        *viper.Viper
+	watchFile bool // 是否监听文件变化
 }
 
 // NewSetting create a setting entry.
-func NewSetting(dir string) (*Setting, error) {
+func NewSetting(dir string, opts ...Option) (*Setting, error) {
 	// 获取配置文件当前路径的绝对路径地址
 	configDir, err := filepath.Abs(dir)
 	if err != nil {
@@ -31,8 +32,15 @@ func NewSetting(dir string) (*Setting, error) {
 		return nil, err
 	}
 
-	s := &Setting{vp}
-	s.WatchSettingChange()
+	s := &Setting{vp: vp}
+	for _, o := range opts {
+		o(s)
+	}
+
+	if s.watchFile {
+		s.WatchSettingChange()
+	}
+
 	return s, nil
 }
 

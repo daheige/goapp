@@ -22,6 +22,7 @@ type AppServerSettingS struct {
 	ReadTimeout         time.Duration
 	WriteTimeout        time.Duration
 	LogDir              string
+	JobPProfPort        int
 }
 
 // InitConfig 读取rpc配置文件
