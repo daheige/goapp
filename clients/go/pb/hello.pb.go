@@ -40,7 +40,7 @@ type HelloReq struct {
 
 	// [修饰符] 类型 字段名 = 标识符;
 	// @inject_tag: json:"id" validate:"required,min=1"
-	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Id int64 `protobuf:"varint,1,opt,name=id,proto3" json:"id" validate:"required,min=1"`
 }
 
 func (x *HelloReq) Reset() {
@@ -89,9 +89,9 @@ type HelloReply struct {
 	unknownFields protoimpl.UnknownFields
 
 	// @inject_tag: json:"name"
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name"`
 	// @inject_tag: json:"message"
-	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message,omitempty"`
+	Message string `protobuf:"bytes,2,opt,name=message,proto3" json:"message"`
 }
 
 func (x *HelloReply) Reset() {
@@ -148,7 +148,7 @@ type InfoReq struct {
 
 	// 主要用于grpc validator参数校验
 	// @inject_tag: json:"name" validate:"required,min=1"
-	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	Name string `protobuf:"bytes,1,opt,name=name,proto3" json:"name" validate:"required,min=1"`
 }
 
 func (x *InfoReq) Reset() {

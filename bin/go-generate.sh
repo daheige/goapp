@@ -15,7 +15,8 @@ pb_dir=$root_dir/pb
 mkdir -p $pb_dir
 
 #delete old pb code.
-rm -rf $root_dir/pb/*
+rm -rf $root_dir/clients/go/pb/*.pb.go
+rm -rf $root_dir/clients/go/pb/*.gw.go
 
 echo "\n\033[0;32mGenerating codes...\033[39;49;0m\n"
 
@@ -29,10 +30,10 @@ $protoExec -I $protos_dir --go_out=plugins=grpc:$root_dir/pb $protos_dir/*.proto
 #http gw code
 $protoExec -I $protos_dir --grpc-gateway_out=logtostderr=true:$root_dir/pb $protos_dir/*.proto
 
+sh $root_dir/bin/protoc-inject-tag.sh
+
 # cp golang client code
 mkdir -p $root_dir/clients/go/pb
-
-rm -rf $root_dir/clients/go/pb/*.go
 
 cp -R $root_dir/pb/*.go $root_dir/clients/go/pb
 
