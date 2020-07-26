@@ -7,6 +7,7 @@ AppServer:
   ReadTimeout: 6
   WriteTimeout: 6
   LogDir: ./logs
+  JobPProfPort: 30031
 
 #db 配置
 DbDefault:
