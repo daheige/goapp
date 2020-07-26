@@ -1,0 +1,16 @@
+logs
+*.log
+*.exe
+*.txt
+cmd/rpc/rpc
+cmd/web/web
+cmd/worker/worker
+test
+*_test.go
+app.yaml
+vendor/*
+pprof.cpu
+pprof.heap
+pprof.trace
+pprof.cpu*
+.DS_Store
