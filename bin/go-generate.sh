@@ -32,6 +32,9 @@ $protoExec -I $protos_dir --grpc-gateway_out=logtostderr=true:$root_dir/pb $prot
 
 sh $root_dir/bin/protoc-inject-tag.sh
 
+# request validator code
+sh $root_dir/bin/validator-generate.sh
+
 # cp golang client code
 mkdir -p $root_dir/clients/go/pb
 
