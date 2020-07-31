@@ -40,4 +40,20 @@ func main() {
 	}
 
 	log.Printf("name:%s,message:%s", res.Name, res.Message)
+
+	res2, err := c.Info(context.Background(), &pb.InfoReq{
+		Name: "daheige",
+	})
+
+	log.Println(res2, err)
 }
+
+/**
+2020/07/31 23:08:14 name:username: xiaoming,message:call ok
+2020/07/31 23:08:14 address:"shenzhen" message:"ok" <nil>
+
+当参数不合法抛出错误
+2020/07/31 23:07:28 name:username: xiaoming,message:call ok
+2020/07/31 23:07:28 <nil> rpc error: code = InvalidArgument desc = Key: 'InfoReq.Name' Error:Field validation
+for 'Name' failed on the 'required' tag
+*/

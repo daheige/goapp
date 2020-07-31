@@ -22,6 +22,19 @@ client.sayHello(request, function(err, data) {
     console.log(data.getName());
 });
 
+let req2 = new messages.InfoReq();
+req2.setName("daheige");
+client.info(req2, function(err, data) {
+    if (err) {
+        console.error(err);
+        return;
+    }
+
+    console.log(data);
+    console.log(data.getMessage());
+    console.log(data.getAddress());
+});
+
 /**
  % node hello.js
  {
@@ -34,4 +47,15 @@ client.sayHello(request, function(err, data) {
 }
  call ok
  username: xiaoming
+
+ {
+  wrappers_: null,
+  messageId_: undefined,
+  arrayIndexOffset_: -1,
+  array: [ 'shenzhen', 'ok' ],
+  pivot_: 1.7976931348623157e+308,
+  convertedPrimitiveFields_: {}
+}
+ ok
+ shenzhen
  */

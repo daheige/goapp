@@ -34,3 +34,13 @@ func (s *GreeterService) SayHello(ctx context.Context, in *pb.HelloReq) (*pb.Hel
 		Message: "call ok",
 	}, nil
 }
+
+// Info method.
+func (s *GreeterService) Info(ctx context.Context, in *pb.InfoReq) (*pb.InfoReply, error) {
+	log.Println(in.Name)
+
+	return &pb.InfoReply{
+		Address: "shenzhen",
+		Message: "ok",
+	}, nil
+}
