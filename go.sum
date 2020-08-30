@@ -51,8 +51,8 @@ github.com/coreos/go-systemd v0.0.0-20190321100706-95778dfbb74e/go.mod h1:F5haX7
 github.com/coreos/pkg v0.0.0-20180928190104-399ea9e2e55f/go.mod h1:E3G3o1h8I7cfcXa63jLwjI0eiQQMgzzUDFVpN/nH/eA=
 github.com/daheige/gmicro v1.1.6 h1:JZCB8HWYbTBDRP4zeDEPGtD9eEXC+hQhDrpwNKbstdU=
 github.com/daheige/gmicro v1.1.6/go.mod h1:TpCHqNPbz+t77Xym5vdIAwlPNJJi/wq37Uphj8+DVWg=
-github.com/daheige/thinkgo v1.10.8 h1:WhJcvOAWZsEZuOWMCFCbWRAAzjXb7V8OyLyP43PvhJ4=
-github.com/daheige/thinkgo v1.10.8/go.mod h1:00rLGkeZD0unGsTNOB6N1bW/XXFtklNqxkMNMolwm24=
+github.com/daheige/thinkgo v1.10.9 h1:flxL4tIDLqYiNcWWEgrysgaApCOuEr8Bn5fXb7r+w1s=
+github.com/daheige/thinkgo v1.10.9/go.mod h1:00rLGkeZD0unGsTNOB6N1bW/XXFtklNqxkMNMolwm24=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
