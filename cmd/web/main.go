@@ -50,7 +50,7 @@ func init() {
 	logger.SetLogDir(config.AppServerConf.LogDir)
 	logger.SetLogFile("go-web.log")
 	logger.MaxSize(500)
-	logger.TraceFileLine(true) //开启文件名和行数追踪
+	logger.TraceFileLine(true) // 开启文件名和行数追踪
 
 	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
 	logger.InitLogger(3)
@@ -106,7 +106,16 @@ func main() {
 		defer logger.Recover()
 
 		if err := server.ListenAndServe(); err != nil {
-			log.Println(err)
+			if err != http.ErrServerClosed {
+				logger.Info("server close error", map[string]interface{}{
+					"trace_error": err.Error(),
+				})
+
+				log.Println(err)
+				return
+			}
+
+			log.Println("server will exit...")
 		}
 	}()
 
@@ -136,5 +145,5 @@ func main() {
 	go server.Shutdown(ctx) // 在独立的携程中关闭服务器
 	<-ctx.Done()
 
-	log.Println("shutting down")
+	log.Println("server shutting down")
 }
