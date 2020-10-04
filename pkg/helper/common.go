@@ -2,6 +2,7 @@ package helper
 
 import (
 	"regexp"
+	"strings"
 )
 
 var (
@@ -14,10 +15,10 @@ func GetDeviceByUa(ua string) string {
 	plat := "web"
 	if regAndroid.MatchString(ua) {
 		plat = "android"
-	} else {
-		if regIos.MatchString(ua) {
-			plat = "ios"
-		}
+	} else if regIos.MatchString(ua) {
+		plat = "ios"
+	} else if strings.Contains(ua, "grpc") {
+		plat = "grpc"
 	}
 
 	return plat

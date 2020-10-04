@@ -34,7 +34,7 @@ func writeLog(ctx context.Context, levelName string, message string, options map
 	_, file, line, _ := runtime.Caller(2)
 	logInfo := map[string]interface{}{
 		"request_uri":    ckeys.GetStringByCtxKey(ctx, ckeys.RequestURI),
-		"log_id":         ckeys.GetStringByCtxKey(ctx, ckeys.XRequestID),
+		"request_id":     ckeys.GetStringByCtxKey(ctx, ckeys.XRequestID),
 		"options":        options,
 		"ip":             ckeys.GetStringByCtxKey(ctx, ckeys.ClientIP),
 		"ua":             ua,

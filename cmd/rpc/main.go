@@ -69,12 +69,13 @@ func main() {
 		gmicro.WithShutdownTimeout(5*time.Second),
 		gmicro.WithHandlerFromEndpoint(pb.RegisterGreeterServiceHandlerFromEndpoint),
 		// gmicro.WithLogger(gmicro.LoggerFunc(log.Printf)),
-		gmicro.WithLogger(gmicro.LoggerFunc(gRPCPrintf)), // 定义grpc logger printf
-		gmicro.WithRequestAccess(true),
+		// gmicro.WithLogger(gmicro.LoggerFunc(gRPCPrintf)), // 定义grpc logger printf
+		// gmicro.WithRequestAccess(true),
 		gmicro.WithPrometheus(true),
 		gmicro.WithGRPCServerOption(grpc.ConnectionTimeout(10*time.Second)),
-		gmicro.WithUnaryInterceptor(interceptor.AccessLog),
+		gmicro.WithUnaryInterceptor(interceptor.AccessLog), // 自定义访问日志记录
 		gmicro.WithGRPCNetwork("tcp"),
+		gmicro.WithHTTPHandler(interceptor.GatewayAccessLog), // gateway请求日志记录
 	)
 
 	// register grpc service
@@ -92,7 +93,10 @@ func main() {
 
 	s.AddRoute(newRoute)
 
-	log.Fatalln(s.StartGRPCAndHTTPServer(config.AppServerConf.GRPCPort))
+	// log.Fatalln(s.StartGRPCAndHTTPServer(config.AppServerConf.GRPCPort))
+
+	// run grpc and http gateway
+	log.Fatalln(s.Start(config.AppServerConf.GRPCHttpGatewayPort, config.AppServerConf.GRPCPort))
 }
 
 func shutdownFunc() {
