@@ -47,8 +47,8 @@ func init() {
 	logger.MaxSize(500)
 	logger.TraceFileLine(true) // 开启文件名和行数追踪
 
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
-	logger.InitLogger(3)
+	// 由于logger基于thinkgo/logger又包装了一层，所以这里是1
+	logger.InitLogger(1)
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)

@@ -4,7 +4,6 @@ import (
 	"context"
 	"runtime"
 	"runtime/debug"
-	"strings"
 
 	"github.com/daheige/goapp/pkg/ckeys"
 	"github.com/daheige/goapp/pkg/helper"
@@ -25,29 +24,21 @@ import (
     "request_uri":"/v1/info/123",
     "log_id":"7bb48d0b-2ef4-fc62-0692-40e72db551ef",
     "trace_file":"/web/go/go-proj/app/web/middleware/log.go",
-    "tag":"v1_info_123",
     "ua":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/75.0.3770.80 Safari/537.36"
 }
 */
 
 func writeLog(ctx context.Context, levelName string, message string, options map[string]interface{}) {
-	reqUri := ckeys.GetStringByCtxKey(ctx, ckeys.RequestURI)
-	tag := strings.Replace(reqUri, "/", "_", -1)
-	tag = strings.Replace(tag, ".", "_", -1)
-	tag = strings.TrimLeft(tag, "_")
-
 	ua := ckeys.GetStringByCtxKey(ctx, ckeys.UserAgent)
-
-	//函数调用
+	// 函数调用
 	_, file, line, _ := runtime.Caller(2)
 	logInfo := map[string]interface{}{
-		"tag":            tag,
 		"request_uri":    ckeys.GetStringByCtxKey(ctx, ckeys.RequestURI),
 		"log_id":         ckeys.GetStringByCtxKey(ctx, ckeys.XRequestID),
 		"options":        options,
 		"ip":             ckeys.GetStringByCtxKey(ctx, ckeys.ClientIP),
 		"ua":             ua,
-		"plat":           helper.GetDeviceByUa(ua), //当前设备匹配
+		"plat":           helper.GetDeviceByUa(ua), // 当前设备匹配
 		"request_method": ckeys.GetStringByCtxKey(ctx, ckeys.RequestMethod),
 		"trace_line":     line,
 		"trace_file":     file,
@@ -85,12 +76,12 @@ func Error(ctx context.Context, message string, context map[string]interface{}) 
 	writeLog(ctx, "error", message, context)
 }
 
-//致命错误或panic捕获
+// 致命错误或panic捕获
 func Emergency(ctx context.Context, message string, context map[string]interface{}) {
 	writeLog(ctx, "emergency", message, context)
 }
 
-//异常捕获处理
+// 异常捕获处理
 func Recover(c interface{}) {
 	defer func() {
 		if err := recover(); err != nil {

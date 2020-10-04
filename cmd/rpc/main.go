@@ -2,8 +2,10 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/daheige/gmicro"
@@ -38,16 +40,18 @@ func init() {
 	logger.SetLogDir(config.AppServerConf.LogDir)
 	logger.SetLogFile("go-grpc.log")
 	logger.MaxSize(500)
-	logger.TraceFileLine(true) //开启文件名和行数追踪
+	logger.TraceFileLine(true) // 开启文件名和行数追踪
 
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
-	logger.InitLogger(3)
+	// 由于logger基于thinkgo/logger又包装了一层，所以这里是1
+	logger.InitLogger(1)
 }
 
 func main() {
 	defer config.CloseAllDatabase()
 
 	log.Println("rpc start...")
+	log.Println("server pid: ", os.Getppid())
+
 	// add the /test endpoint
 	route := gmicro.Route{
 		Method:  "GET",
@@ -62,12 +66,15 @@ func main() {
 		gmicro.WithRouteOpt(route),
 		gmicro.WithShutdownFunc(shutdownFunc),
 		gmicro.WithPreShutdownDelay(2*time.Second),
+		gmicro.WithShutdownTimeout(5*time.Second),
 		gmicro.WithHandlerFromEndpoint(pb.RegisterGreeterServiceHandlerFromEndpoint),
-		gmicro.WithLogger(gmicro.LoggerFunc(log.Printf)),
+		// gmicro.WithLogger(gmicro.LoggerFunc(log.Printf)),
+		gmicro.WithLogger(gmicro.LoggerFunc(gRPCPrintf)), // 定义grpc logger printf
 		gmicro.WithRequestAccess(true),
 		gmicro.WithPrometheus(true),
 		gmicro.WithGRPCServerOption(grpc.ConnectionTimeout(10*time.Second)),
 		gmicro.WithUnaryInterceptor(interceptor.AccessLog),
+		gmicro.WithGRPCNetwork("tcp"),
 	)
 
 	// register grpc service
@@ -90,4 +97,10 @@ func main() {
 
 func shutdownFunc() {
 	log.Println("server will shutdown")
+	logger.Info("server will shutdown", nil)
+}
+
+// gmicro logger printf打印日志函数
+func gRPCPrintf(format string, v ...interface{}) {
+	logger.Info(fmt.Sprintf(format, v...), nil)
 }

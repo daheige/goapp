@@ -2,13 +2,12 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"strings"
 	"time"
 
-	"log"
-
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/daheige/goapp/pkg/setting"
+	"github.com/daheige/thinkgo/setting"
 )
 
 var mcMap = map[string]*memcache.Client{}

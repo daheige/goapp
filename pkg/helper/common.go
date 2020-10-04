@@ -9,7 +9,7 @@ var (
 	regIos     = regexp.MustCompile("i(p|P)(hone|ad|od)|(m|M)ac")
 )
 
-//根据ua获取设备名称
+// GetDeviceByUa 根据ua获取设备名称
 func GetDeviceByUa(ua string) string {
 	plat := "web"
 	if regAndroid.MatchString(ua) {

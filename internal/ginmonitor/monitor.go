@@ -11,7 +11,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
-// metrics 性能监控，gin处理器函数，包装 handler function,不侵入业务逻辑
+// Monitor metrics 性能监控，gin处理器函数，包装 handler function,不侵入业务逻辑
 func Monitor() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		start := time.Now()

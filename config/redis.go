@@ -5,9 +5,8 @@ import (
 	"fmt"
 
 	"github.com/daheige/thinkgo/gredigo"
+	"github.com/daheige/thinkgo/setting"
 	"github.com/gomodule/redigo/redis"
-
-	"github.com/daheige/goapp/pkg/setting"
 )
 
 // InitRedis 初始化redis client

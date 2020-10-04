@@ -6,9 +6,9 @@ import (
 
 	"github.com/gin-gonic/gin"
 
+	"github.com/daheige/goapp/internal/ginmonitor"
 	"github.com/daheige/goapp/internal/web/controller"
 	"github.com/daheige/goapp/internal/web/middleware"
-	"github.com/daheige/goapp/pkg/ginmonitor"
 )
 
 // WebRoute gin web/api 路由设置

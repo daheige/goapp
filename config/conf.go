@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/daheige/goapp/pkg/setting"
+	"github.com/daheige/thinkgo/setting"
 )
 
 // app.yaml section config.
@@ -27,7 +27,7 @@ type AppServerSettingS struct {
 
 // InitConfig 读取rpc配置文件
 func InitConfig(configDir string) error {
-	s, err := setting.NewSetting(configDir)
+	s, err := setting.NewSetting(configDir, "app")
 	if err != nil {
 		return err
 	}

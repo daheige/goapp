@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/daheige/goapp/pkg/setting"
+	"github.com/daheige/thinkgo/setting"
 
 	"github.com/daheige/thinkgo/mysql"
 	"github.com/jinzhu/gorm"
