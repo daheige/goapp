@@ -13,16 +13,12 @@ import (
 
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/web/routes"
-
-	"github.com/daheige/thinkgo/gpprof"
-	"github.com/daheige/thinkgo/logger"
+	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/gpprof"
+	"github.com/daheige/tigago/monitor"
+	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-
-	"github.com/daheige/thinkgo/monitor"
-
-	"github.com/gin-gonic/gin"
-
 	_ "go.uber.org/automaxprocs"
 )
 
@@ -47,20 +43,8 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	logger.SetLogDir(config.AppServerConf.LogDir)
-	logger.SetLogFile("go-web.log")
-	logger.MaxSize(500)
-	logger.TraceFileLine(true) // 开启文件名和行数追踪
-
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是3
-	/*
-		zap logger.go#260 check func
-		check must always be called directly by a method in the Logger interface
-		(e.g., Check, Info, Fatal).
-		const callerSkipOffset = 2
-		这里的callerSkipOffset默认是2，所以这里InitLogger skip需要初始化为1
-	*/
-	logger.InitLogger(1)
+	// 初始化logger句柄
+	logger.InitLogger(config.AppServerConf.LogDir, "go-web.log")
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)
@@ -110,11 +94,11 @@ func main() {
 	// 在独立携程中运行
 	log.Println("server run on: ", config.AppServerConf.HttpPort)
 	go func() {
-		defer logger.Recover()
+		defer logger.Recover(context.Background())
 
 		if err := server.ListenAndServe(); err != nil {
 			if err != http.ErrServerClosed {
-				logger.Error("server close error", map[string]interface{}{
+				logger.Error(context.Background(), "server close error", map[string]interface{}{
 					"trace_error": err.Error(),
 				})
 

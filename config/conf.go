@@ -4,7 +4,7 @@ import (
 	"log"
 	"time"
 
-	"github.com/daheige/thinkgo/setting"
+	"github.com/daheige/tigago/setting"
 )
 
 // app.yaml section config.

@@ -4,12 +4,10 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/daheige/thinkgo/setting"
-
-	"github.com/daheige/thinkgo/mysql"
-	"github.com/jinzhu/gorm"
-
 	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/mysql"
+	"github.com/daheige/tigago/setting"
+	"github.com/jinzhu/gorm"
 )
 
 // InitDatabase 初始化db实例client

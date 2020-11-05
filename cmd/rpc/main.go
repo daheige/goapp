@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"flag"
 	"fmt"
 	"log"
@@ -9,13 +10,12 @@ import (
 	"time"
 
 	"github.com/daheige/gmicro"
-	"github.com/daheige/thinkgo/logger"
-	"google.golang.org/grpc"
-
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/rpc/interceptor"
 	"github.com/daheige/goapp/internal/rpc/service"
 	"github.com/daheige/goapp/pb"
+	"github.com/daheige/goapp/pkg/logger"
+	"google.golang.org/grpc"
 )
 
 var (
@@ -37,13 +37,8 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	logger.SetLogDir(config.AppServerConf.LogDir)
-	logger.SetLogFile("go-grpc.log")
-	logger.MaxSize(500)
-	logger.TraceFileLine(true) // 开启文件名和行数追踪
-
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是1
-	logger.InitLogger(1)
+	// 初始化logger句柄
+	logger.InitLogger(config.AppServerConf.LogDir, "go-rpc.log")
 }
 
 func main() {
@@ -68,7 +63,7 @@ func main() {
 		gmicro.WithPreShutdownDelay(2*time.Second),
 		gmicro.WithShutdownTimeout(5*time.Second),
 		gmicro.WithHandlerFromEndpoint(pb.RegisterGreeterServiceHandlerFromEndpoint),
-		// gmicro.WithLogger(gmicro.LoggerFunc(log.Printf)),
+		gmicro.WithLogger(gmicro.LoggerFunc(log.Printf)),
 		// gmicro.WithLogger(gmicro.LoggerFunc(gRPCPrintf)), // 定义grpc logger printf
 		// gmicro.WithRequestAccess(true),
 		gmicro.WithPrometheus(true),
@@ -101,10 +96,10 @@ func main() {
 
 func shutdownFunc() {
 	log.Println("server will shutdown")
-	logger.Info("server will shutdown", nil)
+	logger.Info(context.Background(), "server will shutdown", nil)
 }
 
 // gmicro logger printf打印日志函数
 func gRPCPrintf(format string, v ...interface{}) {
-	logger.Info(fmt.Sprintf(format, v...), nil)
+	logger.Info(context.Background(), fmt.Sprintf(format, v...), nil)
 }

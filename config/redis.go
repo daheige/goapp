@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/daheige/thinkgo/gredigo"
-	"github.com/daheige/thinkgo/setting"
+	"github.com/daheige/tigago/gredigo"
+	"github.com/daheige/tigago/setting"
 	"github.com/gomodule/redigo/redis"
 )
 

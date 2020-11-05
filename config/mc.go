@@ -7,7 +7,7 @@ import (
 	"time"
 
 	"github.com/bradfitz/gomemcache/memcache"
-	"github.com/daheige/thinkgo/setting"
+	"github.com/daheige/tigago/setting"
 )
 
 var mcMap = map[string]*memcache.Client{}

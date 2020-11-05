@@ -7,7 +7,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 
-	"github.com/daheige/thinkgo/monitor"
+	"github.com/daheige/tigago/monitor"
 	"github.com/prometheus/client_golang/prometheus"
 )
 

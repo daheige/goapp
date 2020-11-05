@@ -9,16 +9,15 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/daheige/thinkgo/gpprof"
-	"github.com/daheige/thinkgo/logger"
-	"github.com/daheige/thinkgo/monitor"
-	"github.com/prometheus/client_golang/prometheus"
-	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/robfig/cron/v3"
-
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/worker/job"
 	"github.com/daheige/goapp/internal/worker/task"
+	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/gpprof"
+	"github.com/daheige/tigago/monitor"
+	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
+	"github.com/robfig/cron/v3"
 )
 
 var (
@@ -42,13 +41,8 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	logger.SetLogDir(config.AppServerConf.LogDir)
-	logger.SetLogFile("go-job.log")
-	logger.MaxSize(500)
-	logger.TraceFileLine(true) // 开启文件名和行数追踪
-
-	// 由于logger基于thinkgo/logger又包装了一层，所以这里是1
-	logger.InitLogger(1)
+	// 初始化logger句柄
+	logger.InitLogger(config.AppServerConf.LogDir, "go-web.log")
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)

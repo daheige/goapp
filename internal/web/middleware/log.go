@@ -11,8 +11,8 @@ import (
 
 	"github.com/daheige/goapp/pkg/helper"
 
-	"github.com/daheige/thinkgo/grecover"
-	"github.com/daheige/thinkgo/gutils"
+	"github.com/daheige/tigago/grecover"
+	"github.com/daheige/tigago/gutils"
 	"github.com/gin-gonic/gin"
 )
 
