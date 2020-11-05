@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/daheige/goapp/internal/web/logic"
+	"github.com/daheige/goapp/pkg/logger"
 
 	"github.com/daheige/goapp/config"
 
@@ -18,6 +19,7 @@ type HomeController struct {
 
 // Index index.
 func (ctrl *HomeController) Index(ctx *gin.Context) {
+	logger.Info(ctx.Request.Context(), "hello", nil)
 	ctx.JSON(HTTPSuccess, gin.H{
 		"code":    200,
 		"message": "ok",

@@ -44,7 +44,7 @@ func InitLogger(dir string, filename string) {
 		logger.WithStdout(logStdout),           // 一般生产环境，debug模式进日志输出到终端，建议不输出到stdout
 		logger.WithJsonFormat(true),            // json格式化
 		logger.WithAddCaller(true),             // 打印行号
-		logger.WithCallerSkip(1),               // 如果基于这个Logger包，再包装一次，这个skip = 2,以此类推
+		logger.WithCallerSkip(3),               // 如果基于这个Logger包，再包装一次，这个skip = 2,以此类推
 		logger.WithEnableColor(logEnableColor), // 日志是否染色，默认不染色
 		logger.WithLogLevel(logLevel),          // 设置日志打印最低级别,如果不设置默认为info级别
 		logger.WithMaxAge(3),                   // 最大保存3天
