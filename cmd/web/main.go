@@ -11,15 +11,16 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/daheige/goapp/config"
-	"github.com/daheige/goapp/internal/web/routes"
-	"github.com/daheige/goapp/pkg/logger"
 	"github.com/daheige/tigago/gpprof"
 	"github.com/daheige/tigago/monitor"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	_ "go.uber.org/automaxprocs"
+
+	"github.com/daheige/goapp/config"
+	"github.com/daheige/goapp/internal/web/routes"
+	"github.com/daheige/goapp/pkg/logger"
 )
 
 var (

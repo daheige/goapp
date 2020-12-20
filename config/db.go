@@ -7,7 +7,7 @@ import (
 	"github.com/daheige/goapp/pkg/logger"
 	"github.com/daheige/tigago/mysql"
 	"github.com/daheige/tigago/setting"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // InitDatabase 初始化db实例client

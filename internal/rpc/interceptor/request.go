@@ -108,13 +108,13 @@ func GatewayAccessLog(mux *gRuntime.ServeMux) http.Handler {
 
 		// log.Println("log_id: ", reqId)
 		// 将requestId 写入当前上下文中
-		r = helper.ContextSet(r, ckeys.XRequestID, reqId)
+		r = helper.SetValueToHTTPCtx(r, ckeys.XRequestID, reqId)
 
 		// 通过ClientIpWare之后，这里的r.RemoteAddr就是客户端的ip真实地址
-		r = helper.ContextSet(r, ckeys.ClientIP, httpRealIP(r))
-		r = helper.ContextSet(r, ckeys.RequestMethod, r.Method)
-		r = helper.ContextSet(r, ckeys.RequestURI, r.RequestURI)
-		r = helper.ContextSet(r, ckeys.UserAgent, r.Header.Get("User-Agent"))
+		r = helper.SetValueToHTTPCtx(r, ckeys.ClientIP, httpRealIP(r))
+		r = helper.SetValueToHTTPCtx(r, ckeys.RequestMethod, r.Method)
+		r = helper.SetValueToHTTPCtx(r, ckeys.RequestURI, r.RequestURI)
+		r = helper.SetValueToHTTPCtx(r, ckeys.UserAgent, r.Header.Get("User-Agent"))
 
 		logger.Info(r.Context(), "exec begin", nil)
 

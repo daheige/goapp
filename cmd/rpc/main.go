@@ -10,12 +10,13 @@ import (
 	"time"
 
 	"github.com/daheige/gmicro"
+	"google.golang.org/grpc"
+
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/rpc/interceptor"
 	"github.com/daheige/goapp/internal/rpc/service"
 	"github.com/daheige/goapp/pb"
 	"github.com/daheige/goapp/pkg/logger"
-	"google.golang.org/grpc"
 )
 
 var (

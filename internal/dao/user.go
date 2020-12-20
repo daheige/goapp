@@ -1,7 +1,7 @@
 package dao
 
 import (
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/model"

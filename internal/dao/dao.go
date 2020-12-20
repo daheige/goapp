@@ -2,7 +2,7 @@ package dao
 
 import (
 	"github.com/gomodule/redigo/redis"
-	"github.com/jinzhu/gorm"
+	"gorm.io/gorm"
 )
 
 // Dao config
