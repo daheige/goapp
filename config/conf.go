@@ -87,7 +87,6 @@ func InitLogger() {
 		logger.WithLogLevel(zap.DebugLevel),               // 设置日志打印最低级别,如果不设置默认为info级别
 		logger.WithMaxAge(7),                              // 最大保存3天
 		logger.WithMaxSize(200),                           // 每个日志文件最大20MB
-		logger.WithEnableCatchStack(true),                 // 当使用Panic方法时候是否记录stack信息
 	}
 
 	// 生成默认的日志句柄对象
