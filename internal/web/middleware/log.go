@@ -7,17 +7,18 @@ import (
 	"strings"
 	"time"
 
-	"github.com/daheige/goapp/pkg/logger"
-
-	"github.com/daheige/goapp/pkg/helper"
-
+	"github.com/daheige/goapp/internal/pkg/ckeys"
+	"github.com/daheige/goapp/internal/pkg/helper"
 	"github.com/daheige/tigago/grecover"
 	"github.com/daheige/tigago/gutils"
+	"github.com/daheige/tigago/logger"
 	"github.com/gin-gonic/gin"
 )
 
+// LogWare 日志中间件
 type LogWare struct{}
 
+// Access access log
 func (ware *LogWare) Access() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		t := time.Now()
@@ -34,11 +35,11 @@ func (ware *LogWare) Access() gin.HandlerFunc {
 		}
 
 		// 设置跟请求相关的ctx信息
-		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, "log_id", logId)
-		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, "client_ip", ctx.ClientIP())
-		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, "request_uri", ctx.Request.RequestURI)
-		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, "user_agent", ctx.GetHeader("User-Agent"))
-		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, "request_method", ctx.Request.Method)
+		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, logger.XRequestID, logId)
+		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, logger.ReqClientIP, ctx.ClientIP())
+		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, logger.RequestURI, ctx.Request.RequestURI)
+		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, ckeys.UserAgent, ctx.GetHeader("User-Agent"))
+		ctx.Request = helper.SetValueToHTTPCtx(ctx.Request, logger.RequestMethod, ctx.Request.Method)
 
 		logger.Info(ctx.Request.Context(), "exec begin", nil)
 
@@ -58,14 +59,14 @@ func (ware *LogWare) Access() gin.HandlerFunc {
 	}
 }
 
-// 请求处理中遇到异常或panic捕获
+// Recover gin请求处理中遇到异常或panic捕获
 func (ware *LogWare) Recover() gin.HandlerFunc {
 	return func(ctx *gin.Context) {
 		defer func() {
 			if err := recover(); err != nil {
 				// log.Printf("error:%v", err)
 				c := ctx.Request.Context()
-				logger.Emergency(c, "exec panic", map[string]interface{}{
+				logger.DPanic(c, "exec panic", map[string]interface{}{
 					"trace_error": fmt.Sprintf("%v", err),
 					"full_stack":  string(grecover.CatchStack()),
 				})
@@ -79,7 +80,7 @@ func (ware *LogWare) Recover() gin.HandlerFunc {
 						errMsg := strings.ToLower(se.Error())
 
 						// 记录操作日志
-						logger.Emergency(c, "os syscall error", map[string]interface{}{
+						logger.DPanic(c, "os syscall error", map[string]interface{}{
 							"trace_error": errMsg,
 						})
 
@@ -98,7 +99,7 @@ func (ware *LogWare) Recover() gin.HandlerFunc {
 				// 代码参考gin recovery.go RecoveryWithWriter方法实现
 				// If the connection is dead, we can't write a status to it.
 				if brokenPipe {
-					ctx.Error(err.(error)) // nolint: errcheck
+					// ctx.Error(err.(error)) // nolint: errcheck
 					ctx.Abort()
 				}
 

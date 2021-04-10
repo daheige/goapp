@@ -12,7 +12,8 @@ import (
 // GreeterService greeter service
 type GreeterService struct{}
 
-// SayHello say something.
+// SayHello say something
+// http://localhost:1336/v1/say/1
 func (s *GreeterService) SayHello(ctx context.Context, in *pb.HelloReq) (*pb.HelloReply, error) {
 	log.Println(config.AppServerConf.HttpPort)
 	log.Println("req data: ", in)

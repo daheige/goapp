@@ -12,7 +12,6 @@ import (
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/worker/job"
 	"github.com/daheige/goapp/internal/worker/task"
-	"github.com/daheige/goapp/pkg/logger"
 	"github.com/daheige/tigago/gpprof"
 	"github.com/daheige/tigago/monitor"
 	"github.com/prometheus/client_golang/prometheus"
@@ -41,8 +40,10 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	// 初始化logger句柄
-	logger.InitLogger(config.AppServerConf.LogDir, "go-web.log")
+	config.AppServerConf.LogFileName = "go-job.log"
+
+	// 初始化日志logger
+	config.InitLogger()
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)
@@ -60,6 +61,9 @@ func init() {
 }
 
 func main() {
+	// 根据需要在程序退出之前，释放db资源
+	// defer config.CloseAllDatabase()
+
 	log.Println("worker start...")
 
 	j := &job.TestJob{}

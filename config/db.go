@@ -4,7 +4,7 @@ import (
 	"context"
 	"fmt"
 
-	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/logger"
 	"github.com/daheige/tigago/mysql"
 	"github.com/daheige/tigago/setting"
 	"gorm.io/gorm"
@@ -43,7 +43,7 @@ func GetDB(name string) *gorm.DB {
 	return db
 }
 
-// CloseAllDatabase main exit defer run.
+// CloseAllDatabase main exit defer run
 func CloseAllDatabase() {
 	mysql.CloseAllDb()
 }

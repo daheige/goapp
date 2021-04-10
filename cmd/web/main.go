@@ -11,16 +11,15 @@ import (
 	"syscall"
 	"time"
 
+	"github.com/daheige/goapp/config"
+	"github.com/daheige/goapp/internal/web/routes"
 	"github.com/daheige/tigago/gpprof"
+	"github.com/daheige/tigago/logger"
 	"github.com/daheige/tigago/monitor"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	_ "go.uber.org/automaxprocs"
-
-	"github.com/daheige/goapp/config"
-	"github.com/daheige/goapp/internal/web/routes"
-	"github.com/daheige/goapp/pkg/logger"
 )
 
 var (
@@ -44,8 +43,9 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	// 初始化logger句柄
-	logger.InitLogger(config.AppServerConf.LogDir, "go-web.log")
+	// 初始化logger
+	config.AppServerConf.LogFileName = "go-web.log"
+	config.InitLogger()
 
 	// 添加prometheus性能监控指标
 	prometheus.MustRegister(monitor.WebRequestTotal)
@@ -73,6 +73,9 @@ func init() {
 }
 
 func main() {
+	// 根据需要在程序退出之前，释放db资源
+	// defer config.CloseAllDatabase()
+
 	// 这里推荐使用gin.New方法，默认的Default方法的logger,recovery中间件
 	// 有些项目也许用不到，另一方面gin recovery 中间件
 	// 对于broken pipe存在一些情形无法覆盖到
@@ -95,7 +98,7 @@ func main() {
 	// 在独立携程中运行
 	log.Println("server run on: ", config.AppServerConf.HttpPort)
 	go func() {
-		defer logger.Recover(context.Background())
+		defer logger.Recover(context.Background(), "server start panic")
 
 		if err := server.ListenAndServe(); err != nil {
 			if err != http.ErrServerClosed {

@@ -3,7 +3,7 @@ package job
 import (
 	"log"
 
-	"github.com/daheige/goapp/pkg/helper"
+	"github.com/daheige/goapp/internal/pkg/helper"
 )
 
 // TestJob test job.

@@ -10,13 +10,12 @@ import (
 	"time"
 
 	"github.com/daheige/gmicro"
-	"google.golang.org/grpc"
-
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/rpc/interceptor"
 	"github.com/daheige/goapp/internal/rpc/service"
 	"github.com/daheige/goapp/pb"
-	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/logger"
+	"google.golang.org/grpc"
 )
 
 var (
@@ -38,8 +37,9 @@ func init() {
 		config.AppServerConf.LogDir = "./logs"
 	}
 
-	// 初始化logger句柄
-	logger.InitLogger(config.AppServerConf.LogDir, "go-rpc.log")
+	// 初始化logger
+	config.AppServerConf.LogFileName = "go-rpc.log"
+	config.InitLogger()
 }
 
 func main() {
@@ -71,7 +71,6 @@ func main() {
 		gmicro.WithGRPCServerOption(grpc.ConnectionTimeout(10*time.Second)),
 		gmicro.WithUnaryInterceptor(interceptor.AccessLog), // 自定义访问日志记录
 		gmicro.WithGRPCNetwork("tcp"),
-		gmicro.WithHTTPHandler(interceptor.GatewayAccessLog), // gateway请求日志记录
 	)
 
 	// register grpc service

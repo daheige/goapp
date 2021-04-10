@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/logger"
 
 	"github.com/gin-gonic/gin"
 )

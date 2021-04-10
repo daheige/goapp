@@ -4,8 +4,9 @@ import (
 	"log"
 	"time"
 
+	"github.com/daheige/goapp/internal/pkg/constants"
 	"github.com/daheige/goapp/internal/web/logic"
-	"github.com/daheige/goapp/pkg/logger"
+	"github.com/daheige/tigago/logger"
 
 	"github.com/daheige/goapp/config"
 
@@ -63,7 +64,7 @@ func (ctrl *HomeController) GetData(ctx *gin.Context) {
 
 // SetData 模拟redis set data
 func (ctrl *HomeController) SetData(ctx *gin.Context) {
-	redisObj, err := config.GetRedisObj("default")
+	redisObj, err := config.GetRedisObj(constants.DefaultRedis)
 	if err != nil {
 		log.Println(err)
 		ctx.JSON(200, gin.H{

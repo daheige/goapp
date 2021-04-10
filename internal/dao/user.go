@@ -5,6 +5,7 @@ import (
 
 	"github.com/daheige/goapp/config"
 	"github.com/daheige/goapp/internal/model"
+	"github.com/daheige/goapp/internal/pkg/constants"
 )
 
 // User user interface.
@@ -19,7 +20,7 @@ type user struct {
 // NewUserDao create an user dao.
 func NewUserDao() User {
 	return &user{
-		db: config.GetDB("default"),
+		db: config.GetDB(constants.DefaultDB),
 	}
 }
 

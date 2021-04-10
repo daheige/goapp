@@ -4,11 +4,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/gin-gonic/gin"
-
-	"github.com/daheige/goapp/internal/ginmonitor"
+	"github.com/daheige/goapp/internal/pkg/ginmonitor"
 	"github.com/daheige/goapp/internal/web/controller"
 	"github.com/daheige/goapp/internal/web/middleware"
+	"github.com/gin-gonic/gin"
 )
 
 // WebRoute gin web/api 路由设置
@@ -55,6 +54,7 @@ func WebRoute(router *gin.Engine) {
 
 	v1.GET("/set-data", homeCtrl.SetData)
 
+	// 比较耗时的操作，在独立协程中处理
 	router.GET("/long-async", homeCtrl.LongAsync)
 
 	// 测试将http 处理器和处理器函数包装为gin.Handler
