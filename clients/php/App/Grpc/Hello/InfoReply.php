@@ -9,6 +9,8 @@ use Google\Protobuf\Internal\RepeatedField;
 use Google\Protobuf\Internal\GPBUtil;
 
 /**
+ * InfoReply info reply
+ *
  * Generated from protobuf message <code>App.Grpc.Hello.InfoReply</code>
  */
 class InfoReply extends \Google\Protobuf\Internal\Message

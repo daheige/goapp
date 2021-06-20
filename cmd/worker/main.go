@@ -92,11 +92,18 @@ func main() {
 	sig := <-ch
 
 	log.Println("exit signal: ", sig.String())
-	// Create a deadline to wait for.
+	// Create a deadline to wait for
 	ctx, cancel := context.WithTimeout(context.Background(), wait)
 	defer cancel()
 
-	c.Stop()
+	done := make(chan struct{}, 1)
+	go func() {
+		close(done)
+
+		c.Stop()
+	}()
+
+	<-done
 	<-ctx.Done()
 
 	log.Println("shutting down")

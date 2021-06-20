@@ -15,9 +15,26 @@ class Hello
           return;
         }
         // \AppGrpc\GPBMetadata\Google\Api\Annotations::initOnce();
-        $pool->internalAddGeneratedFile(hex2bin(
-            "0afb020a0b68656c6c6f2e70726f746f120e4170702e477270632e48656c6c6f22160a0848656c6c6f526571120a0a026964180120012803222b0a0a48656c6c6f5265706c79120c0a046e616d65180120012809120f0a076d65737361676518022001280922170a07496e666f526571120c0a046e616d65180120012809222d0a09496e666f5265706c79120f0a0761646472657373180120012809120f0a076d65737361676518022001280932bd010a0e477265657465725365727669636512560a0853617948656c6c6f12182e4170702e477270632e48656c6c6f2e48656c6c6f5265711a1a2e4170702e477270632e48656c6c6f2e48656c6c6f5265706c79221482d3e493020e120c2f76312f7361792f7b69647d12530a04496e666f12172e4170702e477270632e48656c6c6f2e496e666f5265711a192e4170702e477270632e48656c6c6f2e496e666f5265706c79221782d3e4930211120f2f76312f696e666f2f7b6e616d657d42075a052e2f3b7062620670726f746f33"
-        ), true);
+        $pool->internalAddGeneratedFile(
+            '
+û
+hello.protoApp.Grpc.Hello"
+HelloReq
+
+id ("+
+
+HelloReply
+name (	
+message (	"
+InfoReq
+name (	"-
+	InfoReply
+address (	
+message (	2½
+GreeterServiceV
+SayHello.App.Grpc.Hello.HelloReq.App.Grpc.Hello.HelloReply"‚Óä“/v1/say/{id}S
+Info.App.Grpc.Hello.InfoReq.App.Grpc.Hello.InfoReply"‚Óä“/v1/info/{name}BZ./;pbbproto3'
+        , true);
 
         static::$is_initialized = true;
     }

@@ -40,5 +40,5 @@ function greet($id)
     return $reply->getMessage();
 }
 
-$name = !empty($argv[1]) ? $argv[1] : 0;
+$name = !empty($argv[1]) ? $argv[1] : 1;
 echo greet($name) . PHP_EOL;

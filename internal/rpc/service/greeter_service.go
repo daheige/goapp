@@ -10,7 +10,9 @@ import (
 )
 
 // GreeterService greeter service
-type GreeterService struct{}
+type GreeterService struct {
+	pb.UnimplementedGreeterServiceServer
+}
 
 // SayHello say something
 // http://localhost:1336/v1/say/1

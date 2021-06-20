@@ -137,7 +137,14 @@ func main() {
 	// Optionally, you could run srv.Shutdown in a goroutine and block on
 	// if your application should wait for other services
 	// to finalize based on context cancellation.
-	go server.Shutdown(ctx) // 在独立的携程中关闭服务器
+	done := make(chan struct{}, 1)
+	go func() {
+		defer close(done)
+
+		server.Shutdown(ctx)
+	}()
+
+	<-done
 	<-ctx.Done()
 
 	log.Println("server shutting down")

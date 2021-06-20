@@ -21,6 +21,7 @@ class GreeterServiceClient extends \Grpc\BaseStub {
      * @param \App\Grpc\Hello\HelloReq $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
+     * @return \Grpc\UnaryCall
      */
     public function SayHello(\App\Grpc\Hello\HelloReq $argument,
       $metadata = [], $options = []) {
@@ -34,6 +35,7 @@ class GreeterServiceClient extends \Grpc\BaseStub {
      * @param \App\Grpc\Hello\InfoReq $argument input argument
      * @param array $metadata metadata
      * @param array $options call options
+     * @return \Grpc\UnaryCall
      */
     public function Info(\App\Grpc\Hello\InfoReq $argument,
       $metadata = [], $options = []) {
