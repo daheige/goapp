@@ -38,7 +38,7 @@ cd /usr/local/
     export GOPKG=$GOPATH/pkg
     
     #开启go mod机制
-    export GO111MODULE=on
+    export GO111MODULE=auto
 
     #禁用cgo模块
     export CGO_ENABLED=0
@@ -61,7 +61,7 @@ vim ~/.bash_profile
     export GOBIN=$GOPATH/bin
     export GOPKG=$GOPATH/pkg
     #开启go mod机制
-    export GO111MODULE=on
+    export GO111MODULE=auto
     
     #禁用cgo模块
     export CGO_ENABLED=0
