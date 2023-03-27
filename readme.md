@@ -72,3 +72,6 @@ vim ~/.bash_profile
 ```
 
 :wq 退出即可，然后执行 source ~/.bash_profile 生效
+
+# go mod使用
+https://zhuanlan.zhihu.com/p/482014524
