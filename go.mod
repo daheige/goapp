@@ -6,8 +6,8 @@ require (
 	github.com/bradfitz/gomemcache v0.0.0-20230124162541-5f7a7d875746
 	github.com/daheige/gmicro v1.3.2
 	github.com/daheige/tigago v1.4.2
-	github.com/gin-gonic/gin v1.9.0
-	github.com/go-playground/validator/v10 v10.12.0
+	github.com/gin-gonic/gin v1.9.1
+	github.com/go-playground/validator/v10 v10.14.0
 	github.com/golang/protobuf v1.5.3
 	github.com/gomodule/redigo v1.8.9
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0
