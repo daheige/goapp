@@ -15,12 +15,12 @@
 golang下载地址:
 https://golang.google.cn/dl/
 
-以go最新版本go1.16.15版本为例
-https://golang.google.cn/dl/go1.20.2.linux-amd64.tar.gz
+以go最新版本go1.20.4版本为例
+[https://golang.google.cn/dl/go1.20.2.linux-amd64.tar.gz](https://golang.google.cn/dl/go1.20.4.linux-amd64.tar.gz)
 1. linux环境(centos,ubuntu操作系统)，下载
 ```shell
 cd /usr/local/
-    sudo wget https://golang.google.cn/dl/go1.16.15.linux-amd64.tar.gz
+    sudo wget https://golang.google.cn/dl/go1.20.4.linux-amd64.tar.gz
     sudo tar zxvf go1.16.15.linux-amd64.tar.gz
     # 创建golang需要的目录
     sudo mkdir ~/go
@@ -38,7 +38,7 @@ cd /usr/local/
     export GOPKG=$GOPATH/pkg
     
     #开启go mod机制
-    export GO111MODULE=auto
+    export GO111MODULE=on
 
     #禁用cgo模块
     export CGO_ENABLED=0
@@ -50,7 +50,7 @@ cd /usr/local/
 3. source ~/.bashrc 生效配置
 
 # golang mac系统安装
-只需要下载 https://golang.google.cn/dl/go1.16.15.darwin-amd64.pkg 然后点击下一步，下一步就可以安装完毕
+只需要下载 [https://golang.google.cn/dl/go1.16.15.darwin-amd64.pkg](https://golang.google.cn/dl/go1.20.4.darwin-amd64.pkg) 然后点击下一步，下一步就可以安装完毕
 环境变量配置：
 vim ~/.bash_profile
 ```shell
@@ -61,7 +61,7 @@ vim ~/.bash_profile
     export GOBIN=$GOPATH/bin
     export GOPKG=$GOPATH/pkg
     #开启go mod机制
-    export GO111MODULE=auto
+    export GO111MODULE=on
     
     #禁用cgo模块
     export CGO_ENABLED=0
